@@ -3,7 +3,16 @@ from time import time
 import PySimpleGUI as sg
 
 
-def setTheme(mode):
+def setTheme(mode: str) -> None:
+    """
+    Sets the theme of the application
+
+    Parameters:
+        mode (str): The mode of the application ("Dark Mode", "Light Mode")
+
+    Returns:
+        None
+    """
     theme = "DarkGrey15"
     match mode:
         case "Dark Mode":
