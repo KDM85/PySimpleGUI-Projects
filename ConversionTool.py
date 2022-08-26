@@ -10,7 +10,18 @@ arrVolImp = ["fl oz", "gi", "pt", "qt", "gal"]
 arrVolMet = ["ml", "cl", "dl", "l", "dal", "hl", "kl"]
 
 
-def convert(dblValue, strType, strInUnit, strOutUnit):
+def convert(dblValue: float, strType: str, strInUnit: str, strOutUnit: str) -> float:
+    """
+    Returns the converted value of the selected output unit as a float
+
+        Parameters:
+            dblValue (float): The value to be converted
+            strType (str): The type of units to be converted (distance, mass, or volume)
+            strInUnit (str): The unit of measure of the original value
+            strOutUnit (str): The desired unit of measure
+        Returns:
+            round(dblValue * dblConversion, 4) (float): The converted value
+    """
     match strType:
         case "Distance":
             arrTable = arrLenImp
@@ -47,7 +58,7 @@ def convert(dblValue, strType, strInUnit, strOutUnit):
     ):
         dblConversion = 1
 
-    match strInUnit:
+    match strInUnit:  # All possible input units
         case "th":
             dblConversion = dblConversion / 1000
         case "bc":
@@ -145,7 +156,7 @@ def convert(dblValue, strType, strInUnit, strOutUnit):
         case "kl":
             dblConversion = dblConversion * 1000000
 
-    match strOutUnit:
+    match strOutUnit:  # All possible output units
         case "th":
             dblConversion = dblConversion * 1000
         case "bc":
@@ -246,9 +257,7 @@ def convert(dblValue, strType, strInUnit, strOutUnit):
     return round(dblValue * dblConversion, 4)
 
 
-arrChoice = []
-for i in range(0, len(arrLenImp)):
-    arrChoice.append(arrLenImp[i])
+arrChoice = [arrLenImp[i] for i in range(0, len(arrLenImp))]
 for j in range(0, len(arrLenMet)):
     arrChoice.append(arrLenMet[j])
 
@@ -299,25 +308,19 @@ while True:
 
     if event == "cboChoice":
         if values["cboChoice"] == "Distance":
-            arrChoice = []
-            for i in range(0, len(arrLenImp)):
-                arrChoice.append(arrLenImp[i])
+            arrChoice = [arrLenImp[i] for i in range(0, len(arrLenImp))]
             for j in range(0, len(arrLenMet)):
                 arrChoice.append(arrLenMet[j])
             window["strFromUnit"].update(values=arrChoice, value="ft")
             window["strToUnit"].update(values=arrChoice, value="m")
         elif values["cboChoice"] == "Mass":
-            arrChoice = []
-            for i in range(0, len(arrWtImp)):
-                arrChoice.append(arrWtImp[i])
+            arrChoice = [arrWtImp[i] for i in range(0, len(arrWtImp))]
             for j in range(0, len(arrWtMet)):
                 arrChoice.append(arrWtMet[j])
             window["strFromUnit"].update(values=arrChoice, value="lb")
             window["strToUnit"].update(values=arrChoice, value="kg")
         elif values["cboChoice"] == "Volume":
-            arrChoice = []
-            for i in range(0, len(arrVolImp)):
-                arrChoice.append(arrVolImp[i])
+            arrChoice = [arrVolImp[i] for i in range(0, len(arrVolImp))]
             for j in range(0, len(arrVolMet)):
                 arrChoice.append(arrVolMet[j])
             window["strFromUnit"].update(values=arrChoice, value="fl oz")
